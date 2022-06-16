@@ -165,8 +165,7 @@ const registrar = () => {
         }    
         const user = new Usuario(nombre, apellido, usuario, nacimiento);
         usuarios.push(user); 
-    }
-    console.log(usuarios);   
+    }   
 }
 
 let op = parseInt(prompt("por favor elija una opcion \n 1- Iniciar Sesión \n 2- Registrar \n 3- Ver Productos \n 4- Ver Recetas\nCualquier otra tecla para salir."));
