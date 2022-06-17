@@ -163,12 +163,12 @@ const registrar = () => {
     }
 
     let fechaDia = parseInt(prompt("Por favor ingrese su día de nacimimiento: "));
-    while(fechaDia <= 0 || fechaDia > 31){
+    while(fechaDia < 1 || fechaDia > 31){
         fechaDia = parseInt(prompt("Por favor ingrese su día de nacimimiento: "));
     }  
 
     let fechaMes = parseInt(prompt("Por favor ingrese su mes de nacimimiento: "));
-    while(fechaMes < 0 || fechaMes > 11){
+    while(fechaMes < 1 || fechaMes > 12){
         fechaMes = parseInt(prompt("Por favor ingrese su mes de nacimimiento: "));
     }
     
