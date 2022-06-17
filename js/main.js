@@ -138,34 +138,52 @@ const login = () => {
 const registrar = () => {
     let nombre = prompt("Por favor ingrese su nombre: ");
     while(nombre == "" || nombre == " "){nombre = prompt("Por favor ingrese su nombre: ");}
+    let encontroNombre = usuarios.some((el)=> el.nombre == nombre);
+
     let apellido = prompt("Por favor ingrese su apellido: ");
-    while(apellido == "" || apellido == " "){apellido = prompt("Por favor ingrese su apellido");}    
+    while(apellido == "" || apellido == " "){apellido = prompt("Por favor ingrese su apellido");}
+    let encontroApellido = usuarios.some((el)=> el.apellido === apellido);    
+    
+    while(encontroNombre && encontroApellido){
+        alert("Nombre y apellido ya existente, por favor ingrese su nombre y apellido correcto");
+        nombre = prompt("Por favor ingrese su nombre: ");
+        encontroNombre = usuarios.some((el)=> el.nombre == nombre);
+        apellido = prompt("Por favor ingrese su apallido: ");
+        encontroApellido = usuarios.some((el)=> el.apellido === apellido);
+    }
+
     let usuario = prompt("Por favor ingrese su usuario: ");
     while(usuario == "" || usuario == " "){usuario = prompt("Por favor ingrese su usuario: ");}
+    let encontroUsuario = usuarios.some((el)=> el.usuario === usuario);
+
+    while(encontroUsuario) {
+        alert("Usuario existente!");
+        usuario = prompt("Por favor ingrese su usuario: ");
+        encontroUsuario = usuarios.some((el)=> el.usuario === usuario);
+    }
+
     let fechaDia = parseInt(prompt("Por favor ingrese su día de nacimimiento: "));
+    while(fechaDia <= 0 || fechaDia > 31){
+        fechaDia = parseInt(prompt("Por favor ingrese su día de nacimimiento: "));
+    }  
+
     let fechaMes = parseInt(prompt("Por favor ingrese su mes de nacimimiento: "));
+    while(fechaMes < 0 || fechaMes > 11){
+        fechaMes = parseInt(prompt("Por favor ingrese su mes de nacimimiento: "));
+    }
+    
     let fechaYear = parseInt(prompt("Por favor ingrese su año de nacimimiento: "));
+    let actual = new Date().getFullYear();
+    while(fechaYear < (actual-110) || fechaYear >= actual){
+        alert("Año incorrecto, por favor ingresar uno correcto");
+        fechaYear = parseInt(prompt("Por favor ingrese su año de nacimimiento: "));
+    }
     
     let nacimiento = new Date(fechaYear,fechaMes-1,fechaDia)
         
-    if(usuarios.length == 0){ 
-        const user = new Usuario(nombre, apellido, usuario, nacimiento);
-        usuarios.push(user);
-    }else{
-        for (let index = 0; index < usuarios.length; index++) {
-            while(usuarios[index].getNombre() === nombre && usuarios[index].getApellido() === apellido){
-                alert("Nombre y apellido ya existente, por favor ingrese su nombre y apellido correcto");
-                nombre = prompt("Por favor ingrese su nombre: ");
-                apellido = prompt("Por favor ingrese su apallido: ");
-            }
-            while(usuarios[index].getUsuario() === usuario) {
-                alert("Usuario existente!");
-                usuario = prompt("Por favor ingrese su usuario: ");
-            }
-        }    
-        const user = new Usuario(nombre, apellido, usuario, nacimiento);
-        usuarios.push(user); 
-    }   
+    const user = new Usuario(nombre, apellido, usuario, nacimiento);
+    usuarios.push(user);
+    console.log(usuarios);    
 }
 
 let op = parseInt(prompt("por favor elija una opcion \n 1- Iniciar Sesión \n 2- Registrar \n 3- Ver Productos \n 4- Ver Recetas\nCualquier otra tecla para salir."));
