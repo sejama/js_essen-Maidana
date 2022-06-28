@@ -1,3 +1,5 @@
+import {Usuario} from modelos;
+
 let comentarios = [];
 let cantidad = suma = puntuacion = 0;
 let usuarios = [];
@@ -5,78 +7,6 @@ let usuarioLog = "";
 const producotos = [];
 const recetas = [];
 
-class Prodcto{
-    constructor(id, nombre, categoria, precio){
-        this.id = id;
-        this.nomre = nombre;
-        this.categoria = categoria;
-        this.precio = precio;
-    }
-}
-
-class Receta{
-    constructor(id, titulo, descripcion){
-        this.id = id;
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-    }
-}
-
-class Comentario{
-    constructor(prodcuto, receta, usuario, comentario, fecha){
-        this.prodcuto = prodcuto;
-        this.receta = receta;
-        this.usuario = usuario;
-        this.comentario = comentario;
-        this.fecha = fecha;
-    }
-}
-
-class Calificar{
-    constructor(prodcuto, receta, usuario, puntos, fecha){
-        this.prodcuto = prodcuto;
-        this.receta = receta;
-        this.usuario = usuario;
-        this.puntos = puntos;
-        this.fecha = fecha;
-    }
-}
-
-class Usuario{
-    constructor(nombre, apellido, usuario, fechaNacimiento){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.usuario = usuario;
-        this.fechaNacimiento = fechaNacimiento;
-    }
-    setNombre(nombre){
-        this.nombre = nombre;
-    }
-    setApellido(apellido){
-        this.apellido = apellido;
-    }
-    setUsuario(usuario){
-        this.usuario = usuario;
-    }
-    getNombre(){
-        return this.nombre;
-    }
-    getApellido(){
-        return this.apellido;
-    }
-    getUsuario(){
-        return this.usuario;
-    }
-    getDia(){
-        return this.fechaNacimiento.getDay();
-    }
-    getMes(){
-        return this.fechaNacimiento.getMonth() + 1  ;
-    }
-    getYear(){
-        return this.fechaNacimiento.getFullYear();
-    }
-}
 
 const logout = () => {
     alert("Gracias por tu visita " + usuarioLog + ", ojala vuelvas pronto.");

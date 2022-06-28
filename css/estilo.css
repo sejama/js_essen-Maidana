@@ -3,3 +3,11 @@
   background-color: aquamarine;
   padding: 0.5rem;
   margin: 0.5rem; }
+
+.form-check-input:checked {
+  background-color: #3a3232;
+  border-color: #0d6efd; }
+
+.oscuro {
+  background-color: #1f1f1f;
+  color: #f1eded; }

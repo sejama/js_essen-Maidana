@@ -21,9 +21,8 @@
     "url": "https://github.com/sejama/js_essen-Maidana/issues"
   },
   "homepage": "https://github.com/sejama/js_essen-Maidana#readme",
-  "dependencies": {},
   "devDependencies": {
     "node-sass": "^7.0.1",
-    "nodemon": "^2.0.16"
+    "nodemon": "^1.19.4"
   }
 }
