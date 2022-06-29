@@ -1,5 +1,3 @@
-import {Usuario} from modelos;
-
 let comentarios = [];
 let cantidad = suma = puntuacion = 0;
 let usuarios = [];
