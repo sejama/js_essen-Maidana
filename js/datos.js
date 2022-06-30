@@ -35,7 +35,7 @@ const productos = [
         descripcion: "Sartén 30cm",
         categoria: "Línea Contemporánea Terra",
         precio: 18000,
-    },
+    }
 ]
 
 const recetas = [
@@ -43,7 +43,6 @@ const recetas = [
         id: 1,
         titulo: "Ratatouille",
         descripcion: "Tiempo aproximado: 25 Porciones: 8 ",
-
     }
 ]
 
@@ -54,7 +53,7 @@ const comentarios = [
         usuario: "usuario1", 
         comentario: "Excelente receta, muy rico", 
         fecha: "2022-02-25"
-    }
+    },
     {
         prodcuto: 2, 
         receta:  "", 
