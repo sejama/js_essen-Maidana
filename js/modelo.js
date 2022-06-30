@@ -37,9 +37,10 @@ export class Usuario{
 }
 
 class Producto{
-    constructor(id, nombre, categoria, precio){
+    constructor(id, nombre, descripcion, categoria, precio){
         this.id = id;
         this.nomre = nombre;
+        this.descripcion = descripcion;
         this.categoria = categoria;
         this.precio = precio;
     }

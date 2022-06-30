@@ -6,7 +6,6 @@ if(localStorage.usuarios){
     datos.forEach(element => {
     usuarios.push(element);
     });
-    console.log(usuarios);
 }
 
 let nombre = document.getElementById("inputNombre");
@@ -62,11 +61,14 @@ function registrar(e){
     let nuevo = new Usuario(nombre, apellido, user, pass, correo, fecha);
     
     if(nuevo && !encontroUsuario){
-        console.log(nuevo);
         usuarios.push(nuevo);
         localStorage.setItem("usuarios", JSON.stringify(usuarios)); //JSON.parse(localStorage.usuarios))
-        console.log(usuarios);
         formulario.reset();
+        let div = document.createElement("div");
+        div.className = "alert alert-success";
+        div.innerHTML = `role="alert"`;
+        div.innerText = "Gurdado con exito!";
+        document.body.appendChild(div);
         setTimeout(function(){window.location.href="ingresar.html";},2500);
     }else{
         alert("Usuario existente!");

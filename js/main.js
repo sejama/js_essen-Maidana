@@ -1,11 +1,8 @@
-let comentarios = [];
-let cantidad = suma = puntuacion = 0;
-let usuarios = [];
-let usuarioLog = "";
-const producotos = [];
-const recetas = [];
-
-
+function cambiarModo() { 
+    var cuerpoweb = document.body; 
+    cuerpoweb.classList.toggle("oscuro"); 
+  } 
+/*
 const logout = () => {
     alert("Gracias por tu visita " + usuarioLog + ", ojala vuelvas pronto.");
     usuarioLog = "";
@@ -62,7 +59,7 @@ const login = () => {
         }
     }
 }
-/*
+
 const registrar = () => {
     let nombre = prompt("Por favor ingrese su nombre: ");
     while(nombre == "" || nombre == " "){nombre = prompt("Por favor ingrese su nombre: ");}

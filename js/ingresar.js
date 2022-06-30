@@ -42,8 +42,18 @@ function ingresar(e){
     if(encontroUsuario && encontroPass){
         let h2 = document.createElement("h2");
         h2.innerText = "hola " + user + ", bienvenido a la entrega número 2!!!";
+        let h3 = document.createElement("h3");
+        h3.innerText = "Proximamente podra realizar comentarios y puntuar los productos essen y las recetas.";
         document.body.appendChild(h2);
+        document.body.appendChild(h3);
         formulario.reset();
+        let ingresoOcultar = document.getElementsByClassName("ocultar");
+        ingresoOcultar[0].style.display = 'none'; // hide
+        ingresoOcultar[1].style.display = 'none'; // hide
+        let ingresoMostrar = document.getElementsByClassName("mostrar");
+        ingresoMostrar.hidden = true;
+        formulario.style.display = 'none';
+        //setTimeout(function(){window.location.href="../index.html";},2500);
     }else{
         alert("Usuario y Contraseña incorrecto");
     }
