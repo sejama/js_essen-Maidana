@@ -62,7 +62,7 @@ const login = () => {
         }
     }
 }
-
+/*
 const registrar = () => {
     let nombre = prompt("Por favor ingrese su nombre: ");
     while(nombre == "" || nombre == " "){nombre = prompt("Por favor ingrese su nombre: ");}
@@ -111,9 +111,9 @@ const registrar = () => {
         
     const user = new Usuario(nombre, apellido, usuario, nacimiento);
     usuarios.push(user);
-}
+}*/
 
-let op = parseInt(prompt("por favor elija una opcion \n 1- Iniciar Sesión \n 2- Registrar \n 3- Ver Productos \n 4- Ver Recetas\nCualquier otra tecla para salir."));
+/*let op = parseInt(prompt("por favor elija una opcion \n 1- Iniciar Sesión \n 2- Registrar \n 3- Ver Productos \n 4- Ver Recetas\nCualquier otra tecla para salir."));
 while(op >=1 && op <= 4){
     switch (op) {
         case 1:
@@ -136,4 +136,4 @@ while(op >=1 && op <= 4){
             op = parseInt(prompt("por favor elija una opcion \n 1- Iniciar Sesión \n 2- Registrar \n 3- Ver Productos \n 4- Ver Recetas\nCualquier otra tecla para salir."));
             break;
     }
-}
+}*/

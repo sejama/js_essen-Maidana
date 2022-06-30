@@ -1,70 +1,47 @@
-//import {Usuario} from './modelo.js';
-class Usuario{
-    constructor(nombre, apellido, usuario, contrasena, correo, fechaNacimiento){
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.usuario = usuario;
-        this.contrasena = contrasena;
-        this.correo = correo;
-        this.fechaNacimiento = fechaNacimiento;
-    }
-    setNombre(nombre){
-        this.nombre = nombre;
-    }
-    setApellido(apellido){
-        this.apellido = apellido;
-    }
-    setUsuario(usuario){
-        this.usuario = usuario;
-    }
-    getNombre(){
-        return this.nombre;
-    }
-    getApellido(){
-        return this.apellido;
-    }
-    getUsuario(){
-        return this.usuario;
-    }
-    getDia(){
-        return this.fechaNacimiento.getDay();
-    }
-    getMes(){
-        return this.fechaNacimiento.getMonth() + 1  ;
-    }
-    getYear(){
-        return this.fechaNacimiento.getFullYear();
-    }
-}
+import {Usuario} from './modelo.js';
 
 const usuarios = [];
-let datos = JSON.parse(localStorage.usuarios)
-datos.forEach(element => {
+if(localStorage.usuarios){
+    let datos = JSON.parse(localStorage.usuarios)
+    datos.forEach(element => {
     usuarios.push(element);
-});
-console.log(usuarios);
-
+    });
+    console.log(usuarios);
+}
 
 let nombre = document.getElementById("inputNombre");
 let apellido = document.getElementById("inputApellido");
+let validoNomApe = false;
 
 nombre.onchange=()=>{
-    console.log(nombre.value)
     let encontroNombre = usuarios.some((el)=> el.nombre == nombre.value);
-    console.log(encontroNombre)
     apellido.onchange=() => {
-        console.log(apellido.value)
         let encontroApellido = usuarios.some((el)=> el.apellido === apellido.value);
-        console.log(encontroApellido)
         if (encontroNombre && encontroApellido){
             alert("Nombre y Apellido existente");
+        }else{
+            validoNomApe = true;
         }
     }
 };
-    
-
-
-
+apellido.onchange=() => {
+    let encontroApellido = usuarios.some((el)=> el.apellido === apellido.value);
+    nombre.onchange=()=>{
+        let encontroNombre = usuarios.some((el)=> el.nombre == nombre.value);
+        if (encontroNombre && encontroApellido){
+            alert("Nombre y Apellido existente");
+        }else{
+            validoNomApe = true;
+        }
+    }
+};
+let user = document.getElementById("inputUsuario");
+user.onchange=()=>{
+    let encontroUsuario = usuarios.some((el)=> el.usuario === user.value);
+    if(encontroUsuario){
+        alert("Usuario existente");
+    }
+}
 
 
 let formulario = document.getElementById("formulario-registrar");
@@ -80,14 +57,18 @@ function registrar(e){
     let user = formulario.children[4].children['inputUsuario'].value;
     let pass = formulario.children[5].children['inputContrasena'].value;
 
-    //let encontroUsuario = usuarios.some((el)=> el.usuario === user);
+    let encontroUsuario = usuarios.some((el)=> el.usuario === user);
     
     let nuevo = new Usuario(nombre, apellido, user, pass, correo, fecha);
-    console.log(nuevo);
-    if(nuevo){
+    
+    if(nuevo && !encontroUsuario){
+        console.log(nuevo);
         usuarios.push(nuevo);
         localStorage.setItem("usuarios", JSON.stringify(usuarios)); //JSON.parse(localStorage.usuarios))
         console.log(usuarios);
-        formulario.reset()
+        formulario.reset();
+        setTimeout(function(){window.location.href="ingresar.html";},2500);
+    }else{
+        alert("Usuario existente!");
     }
 }
