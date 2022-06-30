@@ -6,7 +6,6 @@ if(localStorage.usuarios){
     datos.forEach(element => {
     usuarios.push(element);
     });
-    console.log(usuarios);
 }
 let existe = false;
 let user = document.getElementById("inputUsuario");
