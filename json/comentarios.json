@@ -1,0 +1,16 @@
+[
+    {
+        "prodcuto": "", 
+        "receta": 1, 
+        "usuario": "usuario1", 
+        "comentario": "Excelente receta, muy rico", 
+        "fecha": "2022-02-25"
+    },
+    {
+        "prodcuto": 2, 
+        "receta":  "", 
+        "usuario": "usuario1", 
+        "comentario": "Excelente producto, muy buena calidad para realizar cualquie comida", 
+        "fecha": "2022-04-18"
+    }
+]

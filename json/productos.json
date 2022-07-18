@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Producto 1",
+        "descripcion": "Descripción producto 1",
+        "categoria": "Línea Contemporánea Terra",
+        "img": "../img/terra_sarten_24cm.png",
+        "precio": 15000
+    },
+    {
+        "id": 2,
+        "nombre": "Producto 2",
+        "descripcion": "Descripción producto 2",
+        "categoria": "Línea Contemporánea Terra",
+        "img": "../img/terra_sarten_24cm.png",
+        "precio": 18000
+    },
+    {
+        "id": 3,
+        "nombre": "Producto 3",
+        "descripcion": "Descripción producto 3",
+        "categoria": "Línea Contemporánea Terra",
+        "img": "../img/terra_sarten_24cm.png",
+        "precio": 15000
+    },
+    {
+        "id": 4,
+        "nombre": "Producto 4",
+        "descripcion": "Descripción producto 4",
+        "categoria": "Línea Contemporánea Terra",
+        "img": "../img/terra_sarten_24cm.png",
+        "precio": 15000
+    },
+    {
+        "id": 5,
+        "nombre": "Producto 5",
+        "descripcion": "Descripción producto 5",
+        "categoria": "Línea Contemporánea Terra",
+        "img": "../img/terra_sarten_24cm.png",
+        "precio": 18000
+    }
+]

@@ -1,13 +1,12 @@
 import {Usuario} from './modelo.js';
 
 const usuarios = [];
-if(localStorage.usuarios){
-    let datos = JSON.parse(localStorage.usuarios)
-    datos.forEach(element => {
+localStorage.usuarios ? 
+    JSON.parse(localStorage.usuarios).forEach(element => {
     usuarios.push(element);
-    });
-}
-
+    }) 
+    : NULL;
+    
 let nombre = document.getElementById("inputNombre");
 let apellido = document.getElementById("inputApellido");
 let validoNomApe = false;
@@ -16,32 +15,21 @@ nombre.onchange=()=>{
     let encontroNombre = usuarios.some((el)=> el.nombre == nombre.value);
     apellido.onchange=() => {
         let encontroApellido = usuarios.some((el)=> el.apellido === apellido.value);
-        if (encontroNombre && encontroApellido){
-            alert("Nombre y Apellido existente");
-        }else{
-            validoNomApe = true;
-        }
+        (encontroNombre && encontroApellido) ? alert("Nombre y Apellido existente") : validoNomApe = true;
     }
 };
 apellido.onchange=() => {
     let encontroApellido = usuarios.some((el)=> el.apellido === apellido.value);
     nombre.onchange=()=>{
         let encontroNombre = usuarios.some((el)=> el.nombre == nombre.value);
-        if (encontroNombre && encontroApellido){
-            alert("Nombre y Apellido existente");
-        }else{
-            validoNomApe = true;
-        }
+        (encontroNombre && encontroApellido) ? alert("Nombre y Apellido existente") : validoNomApe = true;
     }
 };
 let user = document.getElementById("inputUsuario");
 user.onchange=()=>{
     let encontroUsuario = usuarios.some((el)=> el.usuario === user.value);
-    if(encontroUsuario){
-        alert("Usuario existente");
-    }
+    encontroUsuario ? alert("Usuario existente") : '';
 }
-
 
 let formulario = document.getElementById("formulario-registrar");
 formulario. addEventListener ("submit", registrar);
@@ -64,12 +52,19 @@ function registrar(e){
         usuarios.push(nuevo);
         localStorage.setItem("usuarios", JSON.stringify(usuarios)); //JSON.parse(localStorage.usuarios))
         formulario.reset();
-        let div = document.createElement("div");
+        /*let div = document.createElement("div");
         div.className = "alert alert-success";
         div.innerHTML = `role="alert"`;
         div.innerText = "Gurdado con exito!";
-        document.body.appendChild(div);
-        setTimeout(function(){window.location.href="ingresar.html";},2500);
+        document.body.appendChild(div);*/
+        Swal.fire({
+            title:'Bienvenido!',
+            text:'Ahora que ya estas registrado, podras realizar comentarios y puntuar!',
+            icon:'success',
+            timer: 3000
+        }).then(() => {
+            window.location.href="ingresar.html";
+        })    
     }else{
         alert("Usuario existente!");
     }

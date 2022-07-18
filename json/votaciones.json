@@ -1,0 +1,20 @@
+[
+    {
+        "usuario": 1,
+        "producto": 2,
+        "receta": null,
+        "puntuacion": 4
+    },
+    {
+        "usuario": 1,
+        "producto": 3,
+        "receta": null,
+        "puntuacion": 4
+    },
+    {
+        "usuario": 1,
+        "producto": null,
+        "receta": 1,
+        "puntuacion": 4
+    }
+]
