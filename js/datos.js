@@ -6,3 +6,8 @@ fetch('../json/usuarios.json')
         )
     //imprimir los datos en la consola
     .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
+
+fetch('../json/comentarios.json')
+    .then(response => response.json())  // convertir a json
+    .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
+    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores

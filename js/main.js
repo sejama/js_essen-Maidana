@@ -19,6 +19,7 @@ salir.onclick = function () {
     title:'Gracias por tu visita '+ usuuarioLog.usuario +'!',
     text:'Ojala vulevas pronto, que tengas un buen día!!!',
     icon:'success',
+    confirmButtonText: "Aceptar",
     timer: 2500
   }).then(() => {
     window.location.href="./page/ingresar.html";

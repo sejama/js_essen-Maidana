@@ -55,8 +55,8 @@ class Receta{
 }
 
 class Comentario{
-    constructor(prodcuto, receta, usuario, comentario, fecha){
-        this.prodcuto = prodcuto;
+    constructor(producto, receta, usuario, comentario, fecha){
+        this.producto = producto;
         this.receta = receta;
         this.usuario = usuario;
         this.comentario = comentario;
@@ -65,8 +65,8 @@ class Comentario{
 }
 
 class Calificar{
-    constructor(prodcuto, receta, usuario, puntos, fecha){
-        this.prodcuto = prodcuto;
+    constructor(producto, receta, usuario, puntos, fecha){
+        this.producto = producto;
         this.receta = receta;
         this.usuario = usuario;
         this.puntos = puntos;
