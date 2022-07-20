@@ -22,15 +22,23 @@ fetch('../json/productos.json')
             let p2 = document.createElement("p");
             p2.className = "card-text";
             p2.innerText = "$" + element.precio;
+            //button type="button" class="btn btn-primary" onclick="showAlert()">Mostrar popup</button>
+            let boton = document.createElement("button");
+            boton.className = "btn btn-primary comentar"+element.id
+            boton.innerHTML = "Comentar";
             divHija.appendChild(p1);
             divHija.appendChild(p2);
+            divHija.appendChild(boton);
             div.appendChild(img);
             div.appendChild(divHija);
             productos.appendChild(div);
         })
-    
     )//creamos las tarjetas de los productos
     .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
+const comentar = document.getElementsByClassName("comentar");
+console.log(comentar)
 
 
-
+function alerta(){
+    alerta("hizo clic");
+}

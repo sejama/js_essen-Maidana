@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Essen Tentaciones | Productos</title>
-
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/estilo.css">
@@ -32,10 +31,13 @@
                     <a class="nav-link" href="./recetas.html">Recetas</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="./registrar.html">Registrarse</a>
+                    <a class="nav-link ocultar" href="./registrar.html">Registrarse</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="./ingresar.html">Ingresar</a>
+                    <a class="nav-link ocultar" href="./ingresar.html">Ingresar</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link mostrar" href="./ingresar.html">Salir</a>
                   </li>
                 </ul>
               </div>
@@ -46,8 +48,10 @@
         <h1>Sesión de los productos con sus categorias</h1>
         <div id ="prodcutos">
         </div>
-        
     </main>
+    <script type="module" src="../js/main.js"></script>
     <script type="module" src="../js/producto.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.29.0/sweetalert2.all.js"></script>
 </body>
 </html>

@@ -42,15 +42,27 @@ function ingresar(e){
         document.body.appendChild(h3);
         formulario.reset();
         let ingresoOcultar = document.getElementsByClassName("ocultar");
-        ingresoOcultar[0].style.display = 'none'; // hide
-        ingresoOcultar[1].style.display = 'none'; // hide
+        ingresoOcultar[0].style.display = 'none';
+        ingresoOcultar[1].style.display = 'none';
         let ingresoMostrar = document.getElementsByClassName("mostrar");
         ingresoMostrar[0].style.display = 'block';
-        console.log(ingresoMostrar);
         formulario.style.display = 'none';
-        sessionStorage.setItem("usuario", JSON.stringify(encontroUsuario));
+        Swal.fire({
+            title:'Bienvenido!',
+            text:'',
+            icon:'success',
+            timer: 2500
+        }).then(() => {
+            sessionStorage.setItem("usuario", JSON.stringify(encontroUsuario));
+            window.location.href="../index.html";
+        })
     }else{
-        alert("Usuario y Contraseña incorrecto");
+        Swal.fire({
+            title:'Atención!',
+            text:'Usuario y/o contraseña incorrecto!',
+            icon:'error',
+            timer: 2500
+        })
     }
 
 }
