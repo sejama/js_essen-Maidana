@@ -1,10 +1,9 @@
 let usuarioLog;
 let comentarios = [];
+
 if(sessionStorage.usuario){usuarioLog = JSON.parse(sessionStorage.usuario);}
-
-
-fetch('../json/productos.json')
-    // Exito
+console.log(usuarioLog);
+fetch('../json/productos.json')// Exito
     .then(response => response.json())  // convertir a json
     .then(json => 
         json.forEach(element => {
@@ -35,53 +34,64 @@ fetch('../json/productos.json')
                 boton.innerHTML = "Comentar";
                 boton.onclick = function() {comentar(element.id, element.nombre)};
                 divHija.appendChild(boton);
+            }else{
+                let boton = document.createElement("button");
+                boton.className = "btn btn-primary comentar" + element.id
+                boton.innerHTML = "Ver Comentarios";
+                boton.onclick = function() {vercomentario(element.id)};
+                divHija.appendChild(boton);
             }
-            
             div.appendChild(img);
             div.appendChild(divHija);
             productos.appendChild(div);
         })
     )//creamos las tarjetas de los productos
     .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
+    
 
+    function vercomentario(id){   
+        window.location.href="./producto.html";
+    }
+    JSON.parse(localStorage.comentarios).forEach(element => {
+        comentarios.push(element)})
     function comentar(id, nombre){
         let comentario;
         Swal
-          .fire({
-              title: "Realizar comentario del "+ nombre + " - ID: " + id,
-              input: "textarea",
-              showCancelButton: true,
-              confirmButtonText: "Guardar",
-              cancelButtonText: "Cancelar",
-              inputValidator: (comentario, id) => {
-                  // Si el valor es válido, debes regresar undefined. Si no, una cadena
-                  if (!comentario) {
-                      return "Por favor escribe un comentario";
-                  } else {
-                      return undefined;
-                  }
-              }
-          })
-          .then(resultado => {
-              if (resultado.value) {
-                  comentario = resultado.value;
-                  console.log("Hola, " + comentario + " " + id);
-                let agregar =
-                {
-                    "producto": id, 
-                    "receta":  "", 
-                    "usuario": usuarioLog.usuaio, 
-                    "comentario": resultado.value,
-                    "fecha": "2022-04-18"
+        .fire({
+            title: "Realizar comentario del "+ nombre + " - ID: " + id,
+            input: "textarea",
+            showCancelButton: true,
+            confirmButtonText: "Guardar",
+            cancelButtonText: "Cancelar",
+            inputValidator: (comentario) => {
+                // Si el valor es válido, debes regresar undefined. Si no, una cadena
+                if (!comentario) {
+                    return "Por favor escribe un comentario";
+                } else {
+                    return undefined;
                 }
-                JSON.parse(localStorage.comentarios).forEach(element => {
-                    comentarios.push(element)})
+            }
+        })
+        .then(resultado => {
+            if (resultado.value) {
+                comentario = resultado.value;
+                console.log("Hola, " + comentario + " " + id);
+            let agregar =
+                {
+                "id": comentarios.length+1,
+                "producto": id, 
+                "receta":  "", 
+                "usuario": usuarioLog.usuario, 
+                "comentario": resultado.value,
+                "fecha": "2022-04-18"
+                }
                 comentarios.push(agregar)
                 localStorage.removeItem("comentarios");
                 localStorage.setItem("comentarios", JSON.stringify(comentarios));
-              }
-          })
-          .then(() => {
+            }
+        })
+        .then(() => {
             window.location.href="./producto.html";
         });
-      }
+        return id;
+    }

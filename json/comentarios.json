@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
         "producto": "", 
         "receta": 1, 
         "usuario": "usuario1", 
@@ -7,10 +8,19 @@
         "fecha": "2022-02-25"
     },
     {
+        "id": 2,
         "producto": 2, 
         "receta":  "", 
         "usuario": "usuario1", 
         "comentario": "Excelente producto, muy buena calidad para realizar cualquie comida", 
         "fecha": "2022-04-18"
+    },
+    {
+        "id": 3,
+        "producto": 2, 
+        "receta":  "", 
+        "usuario": "usuario2", 
+        "comentario": "Muy buen producto, muy buena calidad para realizar cualquie comida", 
+        "fecha": "2022-04-27"
     }
 ]
