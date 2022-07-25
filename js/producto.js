@@ -1,7 +1,7 @@
 let usuarioLog;
 let comentarios = [];
 
-if(sessionStorage.usuario){usuarioLog = JSON.parse(sessionStorage.usuario);}
+sessionStorage.usuario ? usuarioLog = JSON.parse(sessionStorage.usuario) : null;
 
 fetch('../json/productos.json')// Exito
     .then(response => response.json())  // convertir a json
@@ -49,47 +49,56 @@ fetch('../json/productos.json')// Exito
     .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
     
 
-    function vercomentario(id){  
-        if(localStorage.producto){ 
-            localStorage.removeItem("producto");
-            localStorage.setItem("producto", id);
-        }else{
-            localStorage.setItem("producto", id);
-        }
-        window.location.href="./producto.html";
+function vercomentario(id){  
+    if(localStorage.producto){ 
+        localStorage.removeItem("producto");
+        localStorage.setItem("producto", id);
+    }else{
+        localStorage.setItem("producto", id);
     }
-    
+    window.location.href="./producto.html";
+}
+if(localStorage.comentarios){
     JSON.parse(localStorage.comentarios).forEach(element => {
         comentarios.push(element)})
+}else{
+    fetch('../json/comentarios.json')
+    .then(response => response.json())  // convertir a json
+    .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
+    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
 
-    function comentar(id, nombre){
-        if(localStorage.producto){ 
-            localStorage.removeItem("producto");
-            localStorage.setItem("producto", id);
-        }else{
-            localStorage.setItem("producto", id);
-        }
-        let comentario;
-        Swal
-        .fire({
-            title: "Realizar comentario del "+ nombre + " - ID: " + id,
-            input: "textarea",
-            showCancelButton: true,
-            confirmButtonText: "Guardar",
-            cancelButtonText: "Cancelar",
-            inputValidator: (comentario) => {
-                // Si el valor es válido, debes regresar undefined. Si no, una cadena
-                if (!comentario) {
-                    return "Por favor escribe un comentario";
-                } else {
-                    return undefined;
-                }
+    JSON.parse(localStorage.comentarios).forEach(element => {
+        comentarios.push(element)})
+}
+
+
+function comentar(id, nombre){
+    if(localStorage.producto){ 
+        localStorage.removeItem("producto");
+        localStorage.setItem("producto", id);
+    }else{
+        localStorage.setItem("producto", id);
+    }
+    let comentario;
+    Swal.fire({
+        title: "Realizar comentario del "+ nombre + " - ID: " + id,
+        input: "textarea",
+        showCancelButton: true,
+        confirmButtonText: "Guardar",
+        cancelButtonText: "Cancelar",
+        inputValidator: (comentario) => {
+        // Si el valor es válido, debes regresar undefined. Si no, una cadena
+            if(!comentario){
+                return "Por favor escribe un comentario";
+            }else{
+                return undefined;
             }
-        })
-        .then(resultado => {
-            if (resultado.value) {
-                comentario = resultado.value;
-                console.log("Hola, " + comentario + " " + id);
+        }
+    })
+    .then(resultado => {
+        if (resultado.value) {
+            comentario = resultado.value;
+            console.log("Hola, " + comentario + " " + id);
             const hoy = new Date();
             let agregar =
                 {
@@ -98,35 +107,35 @@ fetch('../json/productos.json')// Exito
                 "receta":  "", 
                 "usuario": usuarioLog.usuario, 
                 "comentario": resultado.value,
-                "fecha": `${hoy.getFullYear()}-${zfill(hoy.getMonth()+1,2)}-${zfill(hoy.getDate(),2)}` //"2022-04-18" 
+                "fecha": `${rellenarCero(hoy.getDate(),2)}-${rellenarCero(hoy.getMonth()+1,2)}-${hoy.getFullYear()}` 
                 }
-                comentarios.push(agregar)
-                localStorage.removeItem("comentarios");
-                localStorage.setItem("comentarios", JSON.stringify(comentarios));
-            }
-        })
-        .then(() => {
-            window.location.href="./producto.html";
-        });
-        return id;
-    }
+            comentarios.push(agregar)
+            localStorage.removeItem("comentarios");
+            localStorage.setItem("comentarios", JSON.stringify(comentarios));
+        }
+    })
+    .then(() => {
+        window.location.href="./producto.html";
+    });
+    return id;
+}
 
-    function zfill(number, width) {
-        var numberOutput = Math.abs(number); /* Valor absoluto del número */
-        var length = number.toString().length; /* Largo del número */ 
-        var zero = "0"; /* String de cero */  
+    function rellenarCero(number, cantidad) {
+        var numero = Math.abs(number); /* Valor absoluto del número */
+        var longitud = number.toString().length; /* Largo del número */ 
+        var cero = "0"; /* String de cero */  
         
-        if (width <= length) {
+        if (cantidad <= longitud) {
             if (number < 0) {
-                 return ("-" + numberOutput.toString()); 
+                 return ("-" + numero.toString()); 
             } else {
-                 return numberOutput.toString(); 
+                 return numero.toString(); 
             }
         } else {
             if (number < 0) {
-                return ("-" + (zero.repeat(width - length)) + numberOutput.toString()); 
+                return ("-" + (cero.repeat(cantidad - longitud)) + numero.toString()); 
             } else {
-                return ((zero.repeat(width - length)) + numberOutput.toString()); 
+                return ((cero.repeat(cantidad - longitud)) + numero.toString()); 
             }
         }
     }

@@ -1,11 +1,12 @@
 import {Usuario} from './modelo.js';
 
 const usuarios = [];
+
 localStorage.usuarios ? 
     JSON.parse(localStorage.usuarios).forEach(element => {
     usuarios.push(element)
     }) : NULL;
-
+/*
 let existe = false;
 let user = document.getElementById("inputUsuario");
 user.onchange=()=>{
@@ -17,7 +18,7 @@ let pass = document.getElementById("inputContrasena");
 pass.onchange=()=>{
    usuarios.some((el)=> el.contrasena === pass.value) ? existe = true : null;
 }
-
+*/
 let formulario = document.getElementById("formulario-ingresar");
 formulario. addEventListener ("submit", ingresar);
 function ingresar(e){
@@ -64,5 +65,4 @@ function ingresar(e){
             timer: 2500
         })
     }
-
 }

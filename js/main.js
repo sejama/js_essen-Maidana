@@ -1,6 +1,3 @@
-function cambiarModo() { 
-    document.body.classList.toggle("oscuro"); 
-  } 
 let usuuarioLog;
 if(sessionStorage.usuario){
   usuuarioLog = JSON.parse(sessionStorage.usuario) 

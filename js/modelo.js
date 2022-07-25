@@ -35,7 +35,7 @@ export class Usuario{
         return this.fechaNacimiento.getFullYear();
     }
 }
-
+/*
 class Producto{
     constructor(id, nombre, descripcion, categoria, precio){
         this.id = id;
@@ -73,5 +73,5 @@ class Calificar{
         this.fecha = fecha;
     }
 }
-
+*/
 

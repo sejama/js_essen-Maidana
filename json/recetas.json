@@ -1,19 +1,19 @@
 [
     {
         "id": 1,
-        "titulo": "Receta 1",
+        "nombre": "Receta 1",
         "descripcion": "Descripcion de la receta 1",
         "img": "../img/recetas/Ratatuille00019.jpg"
     },
     {
         "id": 2,
-        "titulo": "Receta 2",       
+        "nombre": "Receta 2",       
         "descripcion": "Descripcion de la receta 2",
         "img": "../img/recetas/Ratatuille00019.jpg"
     },
     {
         "id": 3,
-        "titulo": "Receta 3",       
+        "nombre": "Receta 3",       
         "descripcion": "Descripcion de la receta 3",
         "img": "../img/recetas/Ratatuille00019.jpg"
     }

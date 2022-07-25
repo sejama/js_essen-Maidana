@@ -5,7 +5,7 @@
         "receta": 1, 
         "usuario": "usuario1", 
         "comentario": "Excelente receta, muy rico", 
-        "fecha": "2022-02-25"
+        "fecha": "25-02-2022"
     },
     {
         "id": 2,
@@ -13,14 +13,22 @@
         "receta":  "", 
         "usuario": "usuario1", 
         "comentario": "Excelente producto, muy buena calidad para realizar cualquie comida", 
-        "fecha": "2022-04-18"
+        "fecha": "18-04-2022"
     },
     {
         "id": 3,
+        "producto": "", 
+        "receta": 1, 
+        "usuario": "usuario3", 
+        "comentario": "Muy buena la receta... me quede con ganas de hacer nuevamente ni bien terminamos de comer ", 
+        "fecha": "25-06-2022"
+    },
+    {
+        "id": 4,
         "producto": 2, 
         "receta":  "", 
         "usuario": "usuario2", 
         "comentario": "Muy buen producto, muy buena calidad para realizar cualquie comida", 
-        "fecha": "2022-04-27"
+        "fecha": "27-04-2022"
     }
 ]
