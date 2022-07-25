@@ -1,18 +1,24 @@
 [
     {
-        "usuario": 1,
+        "usuario": "usuario1",
         "producto": 2,
         "receta": null,
-        "puntuacion": 4
+        "puntuacion": 3
     },
     {
-        "usuario": 1,
+        "usuario": "usuario2",
+        "producto": 2,
+        "receta": null,
+        "puntuacion": 5
+    },
+    {
+        "usuario": "usuario1",
         "producto": 3,
         "receta": null,
         "puntuacion": 4
     },
     {
-        "usuario": 1,
+        "usuario": "usuario1",
         "producto": null,
         "receta": 1,
         "puntuacion": 4

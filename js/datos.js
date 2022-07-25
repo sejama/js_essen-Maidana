@@ -1,10 +1,7 @@
-fetch('../json/usuarios.json')
-    // Exito
+fetch('../json/usuarios.json')// Exito
     .then(response => response.json())  // convertir a json
-    .then(json => 
-        !localStorage.usuarios ? localStorage.setItem ("usuarios",JSON.stringify(json)) : null
-        )
-    //imprimir los datos en la consola
+    .then(json => //Cargamos los usuarios para poder ingresar o conprobar que si no existe para crear
+        !localStorage.usuarios ? localStorage.setItem ("usuarios",JSON.stringify(json)) : null)
     .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
 
 fetch('../json/comentarios.json')

@@ -2,7 +2,7 @@ let usuarioLog;
 let comentarios = [];
 
 if(sessionStorage.usuario){usuarioLog = JSON.parse(sessionStorage.usuario);}
-console.log(usuarioLog);
+
 fetch('../json/productos.json')// Exito
     .then(response => response.json())  // convertir a json
     .then(json => 
@@ -49,12 +49,26 @@ fetch('../json/productos.json')// Exito
     .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
     
 
-    function vercomentario(id){   
+    function vercomentario(id){  
+        if(localStorage.producto){ 
+            localStorage.removeItem("producto");
+            localStorage.setItem("producto", id);
+        }else{
+            localStorage.setItem("producto", id);
+        }
         window.location.href="./producto.html";
     }
+    
     JSON.parse(localStorage.comentarios).forEach(element => {
         comentarios.push(element)})
+
     function comentar(id, nombre){
+        if(localStorage.producto){ 
+            localStorage.removeItem("producto");
+            localStorage.setItem("producto", id);
+        }else{
+            localStorage.setItem("producto", id);
+        }
         let comentario;
         Swal
         .fire({
@@ -76,6 +90,7 @@ fetch('../json/productos.json')// Exito
             if (resultado.value) {
                 comentario = resultado.value;
                 console.log("Hola, " + comentario + " " + id);
+            const hoy = new Date();
             let agregar =
                 {
                 "id": comentarios.length+1,
@@ -83,7 +98,7 @@ fetch('../json/productos.json')// Exito
                 "receta":  "", 
                 "usuario": usuarioLog.usuario, 
                 "comentario": resultado.value,
-                "fecha": "2022-04-18"
+                "fecha": `${hoy.getFullYear()}-${zfill(hoy.getMonth()+1,2)}-${zfill(hoy.getDate(),2)}` //"2022-04-18" 
                 }
                 comentarios.push(agregar)
                 localStorage.removeItem("comentarios");
@@ -94,4 +109,24 @@ fetch('../json/productos.json')// Exito
             window.location.href="./producto.html";
         });
         return id;
+    }
+
+    function zfill(number, width) {
+        var numberOutput = Math.abs(number); /* Valor absoluto del número */
+        var length = number.toString().length; /* Largo del número */ 
+        var zero = "0"; /* String de cero */  
+        
+        if (width <= length) {
+            if (number < 0) {
+                 return ("-" + numberOutput.toString()); 
+            } else {
+                 return numberOutput.toString(); 
+            }
+        } else {
+            if (number < 0) {
+                return ("-" + (zero.repeat(width - length)) + numberOutput.toString()); 
+            } else {
+                return ((zero.repeat(width - length)) + numberOutput.toString()); 
+            }
+        }
     }
