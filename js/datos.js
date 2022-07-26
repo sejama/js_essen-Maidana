@@ -10,8 +10,7 @@ if (window.location.href.includes("ingresar.html")) {
         .then(json => //cargamos los datos al localstorage
             !localStorage.comentarios ? localStorage.setItem("comentarios", JSON.stringify(json)) : null)
         .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
-}
-if (window.location.href.includes("index.html")) {
+}else{
     fetch('./json/usuarios.json') // Exito
         .then(response => response.json())  // convertir a json
         .then(json => //Cargamos los usuarios para poder ingresar o conprobar que si no existe para crear
