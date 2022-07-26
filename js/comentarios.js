@@ -1,6 +1,9 @@
-//import {idProducto} from './producto.js';
+import {comentarProducto} from './producto.js';
+import {comentarReceta} from './receta.js';
 let comentarios = [];
 let usuarioLog;
+let idProducto, idReceta;
+let filtrado = [];
 
 
 if(localStorage.comentarios){
@@ -11,7 +14,7 @@ if(localStorage.comentarios){
     .then(response => response.json())  // convertir a json
     .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
     .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
-    
+
     JSON.parse(localStorage.comentarios).forEach(element => {
         comentarios.push(element)})
 }
@@ -19,14 +22,15 @@ if(localStorage.comentarios){
 if(sessionStorage.usuario){usuarioLog = JSON.parse(sessionStorage.usuario);}
 
 if(window.location.href.includes("producto")){
-    let idProducto = parseInt(localStorage.getItem("producto")); 
-
+    idProducto = parseInt(localStorage.getItem("producto")); 
+    let nombreProducto;
     fetch('../json/productos.json')
         // Exito
         .then(response => response.json())  // convertir a json
         .then(json => 
             json.find((el) => el.id  ===  idProducto))
         .then(producto =>{
+            nombreProducto = producto.nombre
             let productos = document.getElementById("producto");
             let h1 = document.createElement("h1");
             h1.innerHTML =  "Sesión de los comentaiors del producto: " + producto.nombre;
@@ -34,7 +38,7 @@ if(window.location.href.includes("producto")){
         })
 
     //Filtramos todos los comentarios de cierto producto
-    let filtrado = [];
+   
     comentarios.forEach(obj => {
         obj.producto === idProducto ? filtrado.push(obj) : null;
     })
@@ -70,11 +74,6 @@ if(window.location.href.includes("producto")){
                     boton.innerHTML = "Eliminar";
                     boton.onclick = function() {eliminar(element.comentario)};
                     divCardBody.appendChild(boton);
-                }else{
-                    let a = document.createElement("a");
-                    a.className = "btn btn-primary";
-                    a.innerHTML = "Responder";
-                    divCardBody.appendChild(a); 
                 }
             }
 
@@ -84,17 +83,26 @@ if(window.location.href.includes("producto")){
             divcomentario.appendChild(divCard);
         })
     }
+    if(usuarioLog){
+        let divboton = document.getElementById("boton");
+        let boton = document.createElement("button");
+        boton.className = "btn btn-primary comentar"
+        boton.innerHTML = "Comentar";
+        boton.onclick = function() {comentarProducto(idProducto, nombreProducto)};
+        divboton.appendChild(boton);
+    }
 }
 
 if(window.location.href.includes("receta")){
     let idReceta = parseInt(localStorage.getItem("receta")); 
-
+    let nombreReceta;
     fetch('../json/recetas.json')
         // Exito
         .then(response => response.json())  // convertir a json
         .then(json => 
             json.find((el) => el.id  ===  idReceta))
         .then(receta =>{
+            nombreReceta = receta.nombre;
             let recetas = document.getElementById("receta");
             let h1 = document.createElement("h1");
             h1.innerHTML =  "Sesión de los comentaiors de la receta: " + receta.nombre;
@@ -138,11 +146,6 @@ if(window.location.href.includes("receta")){
                     boton.innerHTML = "Eliminar";
                     boton.onclick = function() {eliminar(element.comentario)};
                     divCardBody.appendChild(boton);
-                }else{
-                    let a = document.createElement("a");
-                    a.className = "btn btn-primary";
-                    a.innerHTML = "Responder";
-                    divCardBody.appendChild(a);
                 }
             }
 
@@ -151,6 +154,14 @@ if(window.location.href.includes("receta")){
 
             divcomentario.appendChild(divCard);
         })
+    }
+    if(usuarioLog){   
+        let divboton = document.getElementById("boton");
+        let boton = document.createElement("button");
+        boton.className = "btn btn-primary comentar"
+        boton.innerHTML = "Comentar";
+        boton.onclick = function() {comentarReceta(idReceta, nombreReceta)};
+        divboton.appendChild(boton);
     }
 }
 
@@ -165,14 +176,18 @@ function eliminar(comentario){
     });
     localStorage.removeItem("comentarios");
     localStorage.setItem("comentarios", JSON.stringify(nuevocomentarios));
-    JSON.parse(localStorage.comentarios).forEach(element => {
-        comentarios.push(element)})
-    comentarios.forEach(obj => {
-        obj.producto === idProducto ? filtrado.push(obj) : null;
-    }) 
+    JSON.parse(localStorage.comentarios).forEach(element => {comentarios.push(element)})
     if(window.location.href.includes("producto")){
-    window.location.href="./producto.html";}
-    
+        comentarios.forEach(obj => {
+            obj.producto === idProducto ? filtrado.push(obj) : null;
+        })
+        window.location.href="./producto.html";
+    }
     if(window.location.href.includes("receta")){
-        window.location.href="./receta.html";}
+        comentarios.forEach(obj => {
+            obj.receta === idReceta ? filtrado.push(obj) : null;
+        })
+        window.location.href="./receta.html";
+    }
+    
 }

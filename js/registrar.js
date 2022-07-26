@@ -1,11 +1,11 @@
 import {Usuario} from './modelo.js';
 
 const usuarios = [];
-localStorage.usuarios ? 
+if(localStorage.usuarios){ 
     JSON.parse(localStorage.usuarios).forEach(element => {
     usuarios.push(element);
     }) 
-    : NULL;
+};
     
 let nombre = document.getElementById("inputNombre");
 let apellido = document.getElementById("inputApellido");

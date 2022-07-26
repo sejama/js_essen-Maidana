@@ -3,6 +3,20 @@ let comentarios = [];
 
 if(sessionStorage.usuario){usuarioLog = JSON.parse(sessionStorage.usuario);}
 
+if(localStorage.comentarios){
+    let array = JSON.parse(localStorage.comentarios);
+    JSON.parse(localStorage.comentarios).forEach(element => {
+        comentarios.push(element)})
+}else{
+    fetch('../json/comentarios.json')
+    .then(response => response.json())  // convertir a json
+    .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
+    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
+
+    JSON.parse(localStorage.comentarios).forEach(element => {
+        comentarios.push(element)})
+}
+
 fetch('../json/recetas.json')
     // Exito
     .then(response => response.json())  // convertir a json
@@ -31,7 +45,7 @@ fetch('../json/recetas.json')
                 let boton = document.createElement("button");
                 boton.className = "btn btn-primary comentar"
                 boton.innerHTML = "Comentar";
-                boton.onclick = function() {comentar(element.id, element.nombre)};
+                boton.onclick = function() {comentarReceta(element.id, element.nombre)};
                 divHija.appendChild(boton);
             }else{
                 let boton = document.createElement("button");
@@ -57,20 +71,9 @@ fetch('../json/recetas.json')
         window.location.href="./receta.html";
     }
     
-    if(localStorage.comentarios){
-        JSON.parse(localStorage.comentarios).forEach(element => {
-            comentarios.push(element)})
-    }else{
-        fetch('../json/comentarios.json')
-        .then(response => response.json())  // convertir a json
-        .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
-        .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
     
-        JSON.parse(localStorage.comentarios).forEach(element => {
-            comentarios.push(element)})
-    }
 
-    function comentar(id, nombre){
+    export function comentarReceta(id, nombre){
         if(localStorage.receta){ 
             localStorage.removeItem("receta");
             localStorage.setItem("receta", id);

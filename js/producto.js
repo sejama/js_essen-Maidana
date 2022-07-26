@@ -3,6 +3,19 @@ let comentarios = [];
 
 sessionStorage.usuario ? usuarioLog = JSON.parse(sessionStorage.usuario) : null;
 
+if(localStorage.comentarios){
+    JSON.parse(localStorage.comentarios).forEach(element => {
+        comentarios.push(element)})
+}else{
+    fetch('../json/comentarios.json')
+    .then(response => response.json())  // convertir a json
+    .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
+    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
+
+    JSON.parse(localStorage.comentarios).forEach(element => {
+        comentarios.push(element)})
+}
+
 fetch('../json/productos.json')// Exito
     .then(response => response.json())  // convertir a json
     .then(json => 
@@ -58,21 +71,8 @@ function vercomentario(id){
     }
     window.location.href="./producto.html";
 }
-if(localStorage.comentarios){
-    JSON.parse(localStorage.comentarios).forEach(element => {
-        comentarios.push(element)})
-}else{
-    fetch('../json/comentarios.json')
-    .then(response => response.json())  // convertir a json
-    .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
-    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
 
-    JSON.parse(localStorage.comentarios).forEach(element => {
-        comentarios.push(element)})
-}
-
-
-function comentar(id, nombre){
+export function comentarProducto(id, nombre){
     if(localStorage.producto){ 
         localStorage.removeItem("producto");
         localStorage.setItem("producto", id);
