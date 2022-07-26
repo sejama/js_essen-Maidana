@@ -1,5 +1,6 @@
 import {comentarProducto} from './producto.js';
 import {comentarReceta} from './receta.js';
+
 let comentarios = [];
 let usuarioLog;
 let idProducto, idReceta;
@@ -21,7 +22,7 @@ if(localStorage.comentarios){
 
 if(sessionStorage.usuario){usuarioLog = JSON.parse(sessionStorage.usuario);}
 
-if(window.location.href.includes("producto")){
+if(window.location.href.includes("producto.html")){
     idProducto = parseInt(localStorage.getItem("producto")); 
     let nombreProducto;
     fetch('../json/productos.json')
@@ -93,7 +94,7 @@ if(window.location.href.includes("producto")){
     }
 }
 
-if(window.location.href.includes("receta")){
+if(window.location.href.includes("receta.html")){
     let idReceta = parseInt(localStorage.getItem("receta")); 
     let nombreReceta;
     fetch('../json/recetas.json')

@@ -22,3 +22,4 @@ salir.onclick = function () {
     window.location.href="./page/ingresar.html";
 })
 }
+

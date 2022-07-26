@@ -3,20 +3,21 @@ let comentarios = [];
 
 if(sessionStorage.usuario){usuarioLog = JSON.parse(sessionStorage.usuario);}
 
-if(localStorage.comentarios){
-    let array = JSON.parse(localStorage.comentarios);
-    JSON.parse(localStorage.comentarios).forEach(element => {
-        comentarios.push(element)})
-}else{
-    fetch('../json/comentarios.json')
-    .then(response => response.json())  // convertir a json
-    .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
-    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
 
-    JSON.parse(localStorage.comentarios).forEach(element => {
-        comentarios.push(element)})
-}
+    if(localStorage.comentarios){
+        let array = JSON.parse(localStorage.comentarios);
+        JSON.parse(localStorage.comentarios).forEach(element => {
+            comentarios.push(element)})
+    }else{
+        fetch('../json/comentarios.json')
+        .then(response => response.json())  // convertir a json
+        .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
+        .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
 
+        JSON.parse(localStorage.comentarios).forEach(element => {
+            comentarios.push(element)})
+    }
+if(window.location.href.includes("recetas.html")){
 fetch('../json/recetas.json')
     // Exito
     .then(response => response.json())  // convertir a json
@@ -60,7 +61,7 @@ fetch('../json/recetas.json')
         })
     )//creamos las tarjetas de los recetas
     .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
-
+    }
     function vercomentario(id){  
         if(localStorage.receta){ 
             localStorage.removeItem("receta");

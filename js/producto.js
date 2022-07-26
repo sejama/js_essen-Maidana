@@ -3,19 +3,19 @@ let comentarios = [];
 
 sessionStorage.usuario ? usuarioLog = JSON.parse(sessionStorage.usuario) : null;
 
-if(localStorage.comentarios){
-    JSON.parse(localStorage.comentarios).forEach(element => {
-        comentarios.push(element)})
-}else{
-    fetch('../json/comentarios.json')
-    .then(response => response.json())  // convertir a json
-    .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
-    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
 
-    JSON.parse(localStorage.comentarios).forEach(element => {
-        comentarios.push(element)})
+    if(localStorage.comentarios){
+        JSON.parse(localStorage.comentarios).forEach(element => {
+            comentarios.push(element)})
+    }else{
+        fetch('../json/comentarios.json')
+        .then(response => response.json())  // convertir a json
+        .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
+        .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
+        JSON.parse(localStorage.comentarios).forEach(element => {
+            comentarios.push(element)})
 }
-
+if(window.location.href.includes("productos.html")){
 fetch('../json/productos.json')// Exito
     .then(response => response.json())  // convertir a json
     .then(json => 
@@ -60,7 +60,7 @@ fetch('../json/productos.json')// Exito
         })
     )//creamos las tarjetas de los productos
     .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
-    
+    }
 
 function vercomentario(id){  
     if(localStorage.producto){ 
