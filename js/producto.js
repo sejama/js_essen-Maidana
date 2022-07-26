@@ -121,9 +121,9 @@ export function comentarProducto(id, nombre) {
 }
 
 function rellenarCero(number, cantidad) {
-    var numero = Math.abs(number); /* Valor absoluto del número */
-    var longitud = number.toString().length; /* Largo del número */
-    var cero = "0"; /* String de cero */
+    let numero = Math.abs(number); /* Valor absoluto del número */
+    let longitud = number.toString().length; /* Largo del número */
+    let cero = "0"; /* String de cero */
 
     if (cantidad <= longitud) {
         if (number < 0) {
