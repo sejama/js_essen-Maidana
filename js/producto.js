@@ -98,7 +98,6 @@ export function comentarProducto(id, nombre){
     .then(resultado => {
         if (resultado.value) {
             comentario = resultado.value;
-            console.log("Hola, " + comentario + " " + id);
             const hoy = new Date();
             let agregar =
                 {
@@ -117,7 +116,6 @@ export function comentarProducto(id, nombre){
     .then(() => {
         window.location.href="./producto.html";
     });
-    return id;
 }
 
     function rellenarCero(number, cantidad) {

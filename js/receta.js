@@ -100,7 +100,6 @@ fetch('../json/recetas.json')
         .then(resultado => {
             if (resultado.value) {
                 comentario = resultado.value;
-                console.log("Hola, " + comentario + " " + id);
             const hoy = new Date();
             let agregar =
                 {
@@ -109,7 +108,7 @@ fetch('../json/recetas.json')
                 "receta":  id, 
                 "usuario": usuarioLog.usuario, 
                 "comentario": resultado.value,
-                "fecha": `${hoy.getFullYear()}-${rellenarCero(hoy.getMonth()+1,2)}-${rellenarCero(hoy.getDate(),2)}` //"2022-04-18" 
+                "fecha": `${rellenarCero(hoy.getDate(),2)}-${rellenarCero(hoy.getMonth()+1,2)}-${hoy.getFullYear()}` 
                 }
                 comentarios.push(agregar)
                 localStorage.removeItem("comentarios");
@@ -119,7 +118,6 @@ fetch('../json/recetas.json')
         .then(() => {
             window.location.href="./receta.html";
         });
-        return id;
     }
 
     function rellenarCero(number, cantidad) {
