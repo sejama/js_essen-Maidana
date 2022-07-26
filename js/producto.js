@@ -45,7 +45,7 @@ fetch('../json/productos.json')// Exito
                 let boton = document.createElement("button");
                 boton.className = "btn btn-primary comentar"
                 boton.innerHTML = "Comentar";
-                boton.onclick = function() {comentar(element.id, element.nombre)};
+                boton.onclick = function() {comentarProducto(element.id, element.nombre)};
                 divHija.appendChild(boton);
             }else{
                 let boton = document.createElement("button");
