@@ -1,5 +1,5 @@
-export class Usuario{
-    constructor(nombre, apellido, usuario, contrasena, correo, fechaNacimiento){
+export class Usuario {
+    constructor(nombre, apellido, usuario, contrasena, correo, fechaNacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.usuario = usuario;
@@ -7,31 +7,31 @@ export class Usuario{
         this.correo = correo;
         this.fechaNacimiento = fechaNacimiento;
     }
-    setNombre(nombre){
+    setNombre(nombre) {
         this.nombre = nombre;
     }
-    setApellido(apellido){
+    setApellido(apellido) {
         this.apellido = apellido;
     }
-    setUsuario(usuario){
+    setUsuario(usuario) {
         this.usuario = usuario;
     }
-    getNombre(){
+    getNombre() {
         return this.nombre;
     }
-    getApellido(){
+    getApellido() {
         return this.apellido;
     }
-    getUsuario(){
+    getUsuario() {
         return this.usuario;
     }
-    getDia(){
+    getDia() {
         return this.fechaNacimiento.getDay();
     }
-    getMes(){
-        return this.fechaNacimiento.getMonth() + 1  ;
+    getMes() {
+        return this.fechaNacimiento.getMonth() + 1;
     }
-    getYear(){
+    getYear() {
         return this.fechaNacimiento.getFullYear();
     }
 }

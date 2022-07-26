@@ -1,54 +1,58 @@
-import {comentarProducto} from './producto.js';
-import {comentarReceta} from './receta.js';
+import { comentarProducto } from "./producto.js";
+import { comentarReceta } from "./receta.js";
+
 let comentarios = [];
 let usuarioLog;
 let idProducto, idReceta;
 let filtrado = [];
 
+if (localStorage.comentarios) {
+    JSON.parse(localStorage.comentarios).forEach((element) => {
+        comentarios.push(element);
+    });
+} else {
+    fetch("../json/comentarios.json")
+        .then((response) => response.json()) // convertir a json
+        .then((json) => localStorage.setItem("comentarios", JSON.stringify(json))) //cargamos los datos al localstorage
+        .catch((err) => console.log("Solicitud fallida", err)); // Capturar errores
 
-if(localStorage.comentarios){
-    JSON.parse(localStorage.comentarios).forEach(element => {
-        comentarios.push(element)})
-}else{
-    fetch('../json/comentarios.json')
-    .then(response => response.json())  // convertir a json
-    .then(json => localStorage.setItem ("comentarios",JSON.stringify(json)))//cargamos los datos al localstorage
-    .catch(err => console.log('Solicitud fallida', err)); // Capturar errores
-
-    JSON.parse(localStorage.comentarios).forEach(element => {
-        comentarios.push(element)})
+    JSON.parse(localStorage.comentarios).forEach((element) => {
+        comentarios.push(element);
+    });
 }
 
-if(sessionStorage.usuario){usuarioLog = JSON.parse(sessionStorage.usuario);}
+if (sessionStorage.usuario) {
+    usuarioLog = JSON.parse(sessionStorage.usuario);
+}
 
-if(window.location.href.includes("producto")){
-    idProducto = parseInt(localStorage.getItem("producto")); 
+if (window.location.href.includes("producto.html")) {
+    idProducto = parseInt(localStorage.getItem("producto"));
     let nombreProducto;
-    fetch('../json/productos.json')
+    fetch("../json/productos.json")
         // Exito
-        .then(response => response.json())  // convertir a json
-        .then(json => 
-            json.find((el) => el.id  ===  idProducto))
-        .then(producto =>{
-            nombreProducto = producto.nombre
+        .then((response) => response.json()) // convertir a json
+        .then((json) => json.find((el) => el.id === idProducto))
+        .then((producto) => {
+            nombreProducto = producto.nombre;
             let productos = document.getElementById("producto");
             let h1 = document.createElement("h1");
-            h1.innerHTML =  "Sesión de los comentaiors del producto: " + producto.nombre;
+            h1.innerHTML =
+                "Sesión de los comentaiors del producto: " + producto.nombre;
             productos.appendChild(h1);
-        })
+        });
 
     //Filtramos todos los comentarios de cierto producto
-   
-    comentarios.forEach(obj => {
+
+    comentarios.forEach((obj) => {
         obj.producto === idProducto ? filtrado.push(obj) : null;
-    })
-    if(filtrado.length === 0){
+    });
+    if (filtrado.length === 0) {
         let divcomentario = document.getElementById("comentarios");
-        let h2 = document.createElement("h2")
+        let h2 = document.createElement("h2");
         h2.innerHTML = "El producto no contiene comentarios";
         divcomentario.appendChild(h2);
-    }else{
-        filtrado.forEach(element => {
+    } else {
+        filtrado.forEach((element) => {
             let divcomentario = document.getElementById("comentarios");
             let divCard = document.createElement("div");
             divCard.className = "card";
@@ -59,20 +63,22 @@ if(window.location.href.includes("producto")){
             divCardBody.className = "card-body";
             let h5Body = document.createElement("h5");
             h5Body.className = "card-title";
-            h5Body.innerHTML = "Comentario"
+            h5Body.innerHTML = "Comentario";
             let p = document.createElement("p");
             p.className = "card-text";
             p.innerHTML = element.comentario;
-    
+
             divCardBody.appendChild(h5Body);
             divCardBody.appendChild(p);
 
-            if(usuarioLog){
-                if(usuarioLog.usuario === element.usuario){
+            if (usuarioLog) {
+                if (usuarioLog.usuario === element.usuario) {
                     let boton = document.createElement("button");
-                    boton.className = "btn btn-danger comentar"
+                    boton.className = "btn btn-danger comentar";
                     boton.innerHTML = "Eliminar";
-                    boton.onclick = function() {eliminar(element.comentario)};
+                    boton.onclick = function () {
+                        eliminar(element.comentario);
+                    };
                     divCardBody.appendChild(boton);
                 }
             }
@@ -81,46 +87,47 @@ if(window.location.href.includes("producto")){
             divCard.appendChild(divCardBody);
 
             divcomentario.appendChild(divCard);
-        })
+        });
     }
-    if(usuarioLog){
+    if (usuarioLog) {
         let divboton = document.getElementById("boton");
         let boton = document.createElement("button");
-        boton.className = "btn btn-primary comentar"
+        boton.className = "btn btn-primary comentar";
         boton.innerHTML = "Comentar";
-        boton.onclick = function() {comentarProducto(idProducto, nombreProducto)};
+        boton.onclick = function () {
+            comentarProducto(idProducto, nombreProducto);
+        };
         divboton.appendChild(boton);
     }
 }
 
-if(window.location.href.includes("receta")){
-    let idReceta = parseInt(localStorage.getItem("receta")); 
+if (window.location.href.includes("receta.html")) {
+    let idReceta = parseInt(localStorage.getItem("receta"));
     let nombreReceta;
-    fetch('../json/recetas.json')
+    fetch("../json/recetas.json")
         // Exito
-        .then(response => response.json())  // convertir a json
-        .then(json => 
-            json.find((el) => el.id  ===  idReceta))
-        .then(receta =>{
+        .then((response) => response.json()) // convertir a json
+        .then((json) => json.find((el) => el.id === idReceta))
+        .then((receta) => {
             nombreReceta = receta.nombre;
             let recetas = document.getElementById("receta");
             let h1 = document.createElement("h1");
-            h1.innerHTML =  "Sesión de los comentaiors de la receta: " + receta.nombre;
+            h1.innerHTML = "Sesión de los comentaiors de la receta: " + receta.nombre;
             recetas.appendChild(h1);
-        })
+        });
 
     //Filtramos todos los comentarios de cierto producto
     let filtrado = [];
-    comentarios.forEach(obj => {
+    comentarios.forEach((obj) => {
         obj.receta === idReceta ? filtrado.push(obj) : null;
-    })
-    if(filtrado.length === 0){
+    });
+    if (filtrado.length === 0) {
         let divcomentario = document.getElementById("comentarios");
-        let h2 = document.createElement("h2")
+        let h2 = document.createElement("h2");
         h2.innerHTML = "La receta no contiene comentarios";
         divcomentario.appendChild(h2);
-    }else{
-        filtrado.forEach(element => {
+    } else {
+        filtrado.forEach((element) => {
             let divcomentario = document.getElementById("comentarios");
             let divCard = document.createElement("div");
             divCard.className = "card";
@@ -131,20 +138,22 @@ if(window.location.href.includes("receta")){
             divCardBody.className = "card-body";
             let h5Body = document.createElement("h5");
             h5Body.className = "card-title";
-            h5Body.innerHTML = "Comentario"
+            h5Body.innerHTML = "Comentario";
             let p = document.createElement("p");
             p.className = "card-text";
             p.innerHTML = element.comentario;
-    
+
             divCardBody.appendChild(h5Body);
             divCardBody.appendChild(p);
 
-            if(usuarioLog){
-                if(usuarioLog.usuario === element.usuario){
+            if (usuarioLog) {
+                if (usuarioLog.usuario === element.usuario) {
                     let boton = document.createElement("button");
-                    boton.className = "btn btn-danger comentar"
+                    boton.className = "btn btn-danger comentar";
                     boton.innerHTML = "Eliminar";
-                    boton.onclick = function() {eliminar(element.comentario)};
+                    boton.onclick = function () {
+                        eliminar(element.comentario);
+                    };
                     divCardBody.appendChild(boton);
                 }
             }
@@ -153,41 +162,44 @@ if(window.location.href.includes("receta")){
             divCard.appendChild(divCardBody);
 
             divcomentario.appendChild(divCard);
-        })
+        });
     }
-    if(usuarioLog){   
+    if (usuarioLog) {
         let divboton = document.getElementById("boton");
         let boton = document.createElement("button");
-        boton.className = "btn btn-primary comentar"
+        boton.className = "btn btn-primary comentar";
         boton.innerHTML = "Comentar";
-        boton.onclick = function() {comentarReceta(idReceta, nombreReceta)};
+        boton.onclick = function () {
+            comentarReceta(idReceta, nombreReceta);
+        };
         divboton.appendChild(boton);
     }
 }
 
-function eliminar(comentario){
+function eliminar(comentario) {
     let nuevocomentarios = [];
     let id = 1;
-    comentarios.forEach(element => {
-        if(element.comentario != comentario){
+    comentarios.forEach((element) => {
+        if (element.comentario != comentario) {
             element.id = id++;
             nuevocomentarios.push(element);
         }
     });
     localStorage.removeItem("comentarios");
     localStorage.setItem("comentarios", JSON.stringify(nuevocomentarios));
-    JSON.parse(localStorage.comentarios).forEach(element => {comentarios.push(element)})
-    if(window.location.href.includes("producto")){
-        comentarios.forEach(obj => {
+    JSON.parse(localStorage.comentarios).forEach((element) => {
+        comentarios.push(element);
+    });
+    if (window.location.href.includes("producto")) {
+        comentarios.forEach((obj) => {
             obj.producto === idProducto ? filtrado.push(obj) : null;
-        })
-        window.location.href="./producto.html";
+        });
+        window.location.href = "./producto.html";
     }
-    if(window.location.href.includes("receta")){
-        comentarios.forEach(obj => {
+    if (window.location.href.includes("receta")) {
+        comentarios.forEach((obj) => {
             obj.receta === idReceta ? filtrado.push(obj) : null;
-        })
-        window.location.href="./receta.html";
+        });
+        window.location.href = "./receta.html";
     }
-    
 }
